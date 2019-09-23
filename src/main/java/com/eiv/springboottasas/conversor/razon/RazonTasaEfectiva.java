@@ -1,5 +1,8 @@
 package com.eiv.springboottasas.conversor.razon;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import com.eiv.springboottasas.conversor.enums.Modulo;
 
 public class RazonTasaEfectiva extends RazonAbstract {
@@ -7,7 +10,7 @@ public class RazonTasaEfectiva extends RazonAbstract {
     public RazonTasaEfectiva() {        
     }
     
-    public RazonTasaEfectiva(Integer diasAmortizacion, Modulo moduloOrigen, Double tasa) {
+    public RazonTasaEfectiva(Integer diasAmortizacion, Modulo moduloOrigen, BigDecimal tasa) {
         
         this.diasAmortizacion = diasAmortizacion;
         this.moduloOrigen = moduloOrigen;
@@ -15,23 +18,30 @@ public class RazonTasaEfectiva extends RazonAbstract {
     }
     
     @Override
-    public Double getRazonTasaNominalVencida() {
-        Double exponente = (double)diasAmortizacion / moduloOrigen.getDias();
-        Double base = (tasa / 100) + 1;
+    public BigDecimal getRazonTasaNominalVencida() {
+        BigDecimal exponente = new BigDecimal(diasAmortizacion)
+                .divide(new BigDecimal(moduloOrigen.getDias()), 8, RoundingMode.HALF_UP);
         
-        Double razon = Math.pow(base, exponente) - 1;
+        BigDecimal base = tasa.divide(BigDecimal.TEN).divide(BigDecimal.TEN).add(BigDecimal.ONE);
         
+        Double potencia = Math.pow(base.doubleValue(), exponente.doubleValue());
+        
+        BigDecimal razon = BigDecimal.valueOf(potencia).subtract(BigDecimal.ONE);
         return razon;
     }
     
     @Override
-    public Double getRazonTasaNominalAdelantada() {
-        Double exponente = -((double)diasAmortizacion / moduloOrigen.getDias());
-        Double base = (tasa / 100) + 1;
+    public BigDecimal getRazonTasaNominalAdelantada() {
+        BigDecimal exponente = new BigDecimal(diasAmortizacion)
+                .divide(new BigDecimal(moduloOrigen.getDias()), 8, RoundingMode.HALF_UP);
         
-        Double razon = 1 - Math.pow(base, exponente);
+        BigDecimal base = tasa.divide(BigDecimal.TEN).divide(BigDecimal.TEN).add(BigDecimal.ONE);
+        
+        Double potencia = Math.pow(base.doubleValue(),
+                BigDecimal.ZERO.subtract(exponente).doubleValue());
+        
+        BigDecimal razon = BigDecimal.ONE.subtract(BigDecimal.valueOf(potencia));
         
         return razon;
     }
-
 }

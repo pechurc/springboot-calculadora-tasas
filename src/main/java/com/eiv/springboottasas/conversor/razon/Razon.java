@@ -1,11 +1,13 @@
 package com.eiv.springboottasas.conversor.razon;
 
+import java.math.BigDecimal;
+
 import com.eiv.springboottasas.conversor.enums.Modulo;
 
 public interface Razon {
-    void setTasaOrigen(Double tasa);
+    void setTasaOrigen(BigDecimal tasa);
     
-    Double getTasaOrigen();
+    BigDecimal getTasaOrigen();
     
     void setModuloOrigen(Modulo modulo);
     
@@ -19,9 +21,9 @@ public interface Razon {
     
     int getDiasAmortizacion();
     
-    Double getRazonTasaEfectiva();
+    BigDecimal getRazonTasaEfectiva();
     
-    Double getRazonTasaNominalVencida();
+    BigDecimal getRazonTasaNominalVencida();
     
-    Double getRazonTasaNominalAdelantada();
+    BigDecimal getRazonTasaNominalAdelantada();
 }

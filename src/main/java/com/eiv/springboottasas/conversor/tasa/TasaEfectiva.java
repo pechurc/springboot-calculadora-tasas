@@ -1,22 +1,28 @@
 package com.eiv.springboottasas.conversor.tasa;
 
+import java.math.BigDecimal;
+
 import com.eiv.springboottasas.conversor.enums.Modulo;
 import com.eiv.springboottasas.conversor.razon.Razon;
 
 public class TasaEfectiva extends TasaAbstract {
 
-    public Double getTasa() {
+    public BigDecimal getTasa() {
         
-        return (razonOrigen.getRazonTasaEfectiva() - 1) * 100;
+        return razonOrigen.getRazonTasaEfectiva().subtract(BigDecimal.ONE)
+                .multiply(BigDecimal.TEN)
+                .multiply(BigDecimal.TEN);
     }    
     
-    public Double getRazon() {
+    public BigDecimal getRazon() {
         return razonOrigen.getRazonTasaEfectiva();
     }
 
     @Override
-    public Double calcular(Razon razon, Modulo modulo, int diasAmortizacion) {
-        return (razon.getRazonTasaEfectiva() - 1) * 100;
+    public BigDecimal calcular(Razon razon, Modulo modulo, int diasAmortizacion) {
+        return razon.getRazonTasaEfectiva().subtract(BigDecimal.ONE)
+                .multiply(BigDecimal.TEN)
+                .multiply(BigDecimal.TEN);
     }
 
 }

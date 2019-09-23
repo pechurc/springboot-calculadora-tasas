@@ -1,15 +1,17 @@
 package com.eiv.springboottasas.conversor.razon;
 
+import java.math.BigDecimal;
+
 import com.eiv.springboottasas.conversor.enums.Modulo;
 
 public abstract class RazonAbstract implements Razon {
 
-    protected Double tasa;
+    protected BigDecimal tasa;
     protected Modulo moduloOrigen;
     protected Modulo moduloDestino;
     protected int diasAmortizacion;
 
-    public void setTasaOrigen(Double tasa) {
+    public void setTasaOrigen(BigDecimal tasa) {
         this.tasa = tasa;
     }
 
@@ -25,7 +27,7 @@ public abstract class RazonAbstract implements Razon {
         this.diasAmortizacion = dias;
     }
     
-    public Double getTasaOrigen() {
+    public BigDecimal getTasaOrigen() {
         return tasa;
     }
 
@@ -41,15 +43,15 @@ public abstract class RazonAbstract implements Razon {
         return diasAmortizacion;
     }
     
-    public Double getRazonTasaEfectiva() {
+    public BigDecimal getRazonTasaEfectiva() {
         return tasa;
     }
 
-    public Double getRazonTasaNominalVencida() {
+    public BigDecimal getRazonTasaNominalVencida() {
         return tasa;
     }
     
-    public Double getRazonTasaNominalAdelantada() {
+    public BigDecimal getRazonTasaNominalAdelantada() {
         return tasa;
     }
 }

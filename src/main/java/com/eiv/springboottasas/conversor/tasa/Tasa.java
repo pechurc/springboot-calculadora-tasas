@@ -1,13 +1,15 @@
 package com.eiv.springboottasas.conversor.tasa;
 
+import java.math.BigDecimal;
+
 import com.eiv.springboottasas.conversor.enums.Modulo;
 import com.eiv.springboottasas.conversor.razon.Razon;
 
 public interface Tasa {
    
-    public Double calcular(Razon razon, Modulo modulo, int diasAmortizacion);
+    public BigDecimal calcular(Razon razon, Modulo modulo, int diasAmortizacion);
 
-    Double getTasa();
+    BigDecimal getTasa();
     
     public Modulo getModuloDestino();
 

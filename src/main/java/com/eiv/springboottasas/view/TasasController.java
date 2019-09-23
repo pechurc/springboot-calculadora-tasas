@@ -1,5 +1,6 @@
 package com.eiv.springboottasas.view;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -52,7 +53,7 @@ public class TasasController {
         razon.setTasaOrigen(tasaDto.getValorTasa());
 
         Tasa tasa = TasaFactory.getTasa(tasaDto.getTipoTasaDestino());
-        Double resultado = tasa.calcular(razon, tasaDto.getModuloDestino(), 
+        BigDecimal resultado = tasa.calcular(razon, tasaDto.getModuloDestino(), 
                 tasaDto.getDiasAmortizacion());
         model.addAttribute("resultado", String.format("%.2f", resultado));
         return "tasas";

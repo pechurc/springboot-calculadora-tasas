@@ -1,5 +1,7 @@
 package com.eiv.springboottasas.dto;
 
+import java.math.BigDecimal;
+
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -17,7 +19,7 @@ public class TasaDto {
     private Modulo moduloDestino;
     @NotNull
     @Min(0)
-    private Double valorTasa;
+    private BigDecimal valorTasa;
     @NotNull
     @Min(0)
     private Integer diasAmortizacion;
@@ -30,11 +32,11 @@ public class TasaDto {
         this.tipoTasaOrigen = tipoTasa;
     }
 
-    public Double getValorTasa() {
+    public BigDecimal getValorTasa() {
         return valorTasa;
     }
 
-    public void setValorTasa(Double valorTasa) {
+    public void setValorTasa(BigDecimal valorTasa) {
         this.valorTasa = valorTasa;
     }
 
