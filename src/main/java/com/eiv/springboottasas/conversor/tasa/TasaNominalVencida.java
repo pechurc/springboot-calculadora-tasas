@@ -17,12 +17,12 @@ public class TasaNominalVencida extends TasaAbstract {
         return razonOrigen.getRazonTasaNominalVencida();
     }
 
-	@Override
-	public Double calcular(Razon razon, Modulo modulo, int diasAmortizacion) {
-		 Double numerador = modulo.getDias() * 100.0;
-	     Double tasa = numerador / diasAmortizacion;
-	        
-	     return razon.getRazonTasaNominalVencida() * tasa;
-	}
+    @Override
+    public Double calcular(Razon razon, Modulo modulo, int diasAmortizacion) {
+        Double numerador = modulo.getDias() * 100.0;
+        Double tasa = numerador / diasAmortizacion;
+         
+        return razon.getRazonTasaNominalVencida() * tasa;
+    }
 
 }

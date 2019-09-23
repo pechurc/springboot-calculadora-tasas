@@ -17,12 +17,12 @@ public class TasaNominalAdelantada extends TasaAbstract {
         return razonOrigen.getRazonTasaNominalAdelantada();
     }
 
-	@Override
-	public Double calcular(Razon razon, Modulo modulo, int diasAmortizacion) {
-		Double numerador = modulo.getDias() * 100.0;
+    @Override
+    public Double calcular(Razon razon, Modulo modulo, int diasAmortizacion) {
+        Double numerador = modulo.getDias() * 100.0;
         Double tasa = numerador / diasAmortizacion;
         
         return razon.getRazonTasaNominalAdelantada() * tasa;
-	}
+    }
 
 }

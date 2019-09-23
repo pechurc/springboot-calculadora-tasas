@@ -14,9 +14,9 @@ public class TasaEfectiva extends TasaAbstract {
         return razonOrigen.getRazonTasaEfectiva();
     }
 
-	@Override
-	public Double calcular(Razon razon, Modulo modulo, int diasAmortizacion) {
-		 return (razon.getRazonTasaEfectiva() - 1) * 100;
-	}
+    @Override
+    public Double calcular(Razon razon, Modulo modulo, int diasAmortizacion) {
+        return (razon.getRazonTasaEfectiva() - 1) * 100;
+    }
 
 }

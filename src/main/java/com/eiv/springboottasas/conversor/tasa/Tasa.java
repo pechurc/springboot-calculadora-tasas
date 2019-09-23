@@ -5,8 +5,8 @@ import com.eiv.springboottasas.conversor.razon.Razon;
 
 public interface Tasa {
    
-	public Double calcular(Razon razon, Modulo modulo, int diasAmortizacion);
-	
+    public Double calcular(Razon razon, Modulo modulo, int diasAmortizacion);
+
     Double getTasa();
     
     public Modulo getModuloDestino();

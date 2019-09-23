@@ -20,41 +20,41 @@ import com.eiv.springboottasas.conversor.tasa.Tasa;
 import com.eiv.springboottasas.conversor.tasa.TasaFactory;
 import com.eiv.springboottasas.dto.TasaDto;
 
-
 @Controller
 public class TasasController {
-	
-	@ModelAttribute("tipoTasas")
-	public List<TipoTasa> populateTipoTasas() {
-	    return Arrays.asList(TipoTasa.values());
-	}
-	
-	@ModelAttribute("modulos")
-	public List<Modulo> populateModulos() {
-	    return Arrays.asList(Modulo.values());
-	}
-	
-	@GetMapping("/")
-	public String tasas(TasaDto tasaDto) {
-		return "tasas";		
-	}
-	
-	@PostMapping("/")
-	public String calcularTasa(@Valid TasaDto tasaDto, BindingResult result, Model model) {
-		
-		if (result.hasErrors()) {
-			return "tasas";
-		}
 
-		Razon razon = RazonFactory.getRazon(tasaDto.getTipoTasaOrigen());
-		razon.setModuloOrigen(tasaDto.getModuloOrigen());
-        razon.setModuloDestino(tasaDto.getModuloDestino());               
+    @ModelAttribute("tipoTasas")
+    public List<TipoTasa> populateTipoTasas() {
+        return Arrays.asList(TipoTasa.values());
+    }
+
+    @ModelAttribute("modulos")
+    public List<Modulo> populateModulos() {
+        return Arrays.asList(Modulo.values());
+    }
+
+    @GetMapping("/")
+    public String tasas(TasaDto tasaDto) {
+        return "tasas";
+    }
+
+    @PostMapping("/")
+    public String calcularTasa(@Valid TasaDto tasaDto, BindingResult result, Model model) {
+
+        if (result.hasErrors()) {
+            return "tasas";
+        }
+
+        Razon razon = RazonFactory.getRazon(tasaDto.getTipoTasaOrigen());
+        razon.setModuloOrigen(tasaDto.getModuloOrigen());
+        razon.setModuloDestino(tasaDto.getModuloDestino());
         razon.setDiasAmortizacion(tasaDto.getDiasAmortizacion());
         razon.setTasaOrigen(tasaDto.getValorTasa());
-        
+
         Tasa tasa = TasaFactory.getTasa(tasaDto.getTipoTasaDestino());
-		Double resultado = tasa.calcular(razon, tasaDto.getModuloDestino(), tasaDto.getDiasAmortizacion());
-		model.addAttribute("resultado", String.format("%.2f", resultado));
-		return "tasas";
-	}
+        Double resultado = tasa.calcular(razon, tasaDto.getModuloDestino(), 
+                tasaDto.getDiasAmortizacion());
+        model.addAttribute("resultado", String.format("%.2f", resultado));
+        return "tasas";
+    }
 }
