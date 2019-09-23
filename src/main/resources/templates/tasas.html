@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" class="h-100">
+<head>
+<title>Calculadora de tasas</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body class="h-100">
+	<div class="container d-flex h-100">
+		<div class="row align-items-center h-100 w-100">
+			<div class="card mx-auto ">
+				 <div class="card-header">
+				    Conversor de tasas
+				 </div>
+
+				<div class="card-body">
+					<form action="#" th:action="@{/}" th:object="${tasaDto}" method="post">
+					
+						<div class="form-group">
+							<input type="text" class="form-control" th:field="*{valorTasa}" id="valorTasa"
+								placeholder="Valor tasa origen">
+							<small th:if="${#fields.hasErrors('valorTasa')}" th:error="${valorTasa}" class="mb-0">Valor incorrecto</small>
+						</div>
+
+						<div class="form-group">
+							<input type="text" class="form-control" th:field="*{diasAmortizacion}"
+								id="diaAmortizacion" placeholder="Dias amortizacion">
+							<small th:if="${#fields.hasErrors('diasAmortizacion')}" th:error="${diasAmortizacion}" class="mb-0">Valor incorrecto</small>
+						</div>
+
+						<div class="form-row">
+							<div class="form-group col">
+								<label for="valorTasa">Tipo tasa origen</label>
+								<select th:field="*{tipoTasaOrigen}" class="form-control">
+									<option th:each="tipoTasa : ${tipoTasas}" th:value="${tipoTasa}"
+										th:text="#{|tasas.tipos.${tipoTasa}|}">Tipo tasas</option>
+								</select>
+							</div>						
+							<div class="form-group col">
+								<label for="valorTasa">Modulo origen</label>
+								<select th:field="*{moduloOrigen}" class="form-control">
+									<option th:each="modulo : ${modulos}" th:value="${modulo}"
+										th:text="#{|tasas.modulo.${modulo}|}">Modulo</option>
+								</select>
+							</div>
+						</div>
+						
+						<div class="form-row">
+							<div class="form-group col">
+								<label for="valorTasa">Tipo tasa destino</label>
+								<select th:field="*{tipoTasaDestino}" class="form-control">
+									<option th:each="tipoTasa : ${tipoTasas}" th:value="${tipoTasa}"
+										th:text="#{|tasas.tipos.${tipoTasa}|}">Tipo tasas</option>
+								</select>
+							</div>
+				
+							<div class="form-group col">
+								<label for="valorTasa">Modulo destino</label>
+								<select th:field="*{moduloDestino}" class="form-control">
+									<option th:each="modulo : ${modulos}" th:value="${modulo}"
+										th:text="#{|tasas.modulo.${modulo}|}">Modulo</option>
+								</select>
+							</div>
+						</div>
+						
+						<div class="form-row">
+							<div class="col">
+								<button type="submit" value="Calcular tasa" class="btn btn-primary">Calcular tasa</button>	
+							</div>
+							<div class="col">
+								<p class="resultado" th:if="${resultado}" th:text="'Valor tasa: ' + ${resultado} + '%'">									
+								</p>
+							</div>
+						</div>					
+	
+				</form>						
+			</div>
+		</div>
+
+	</div>
+
+	</div>
+</body>
+</html>
